@@ -62,7 +62,7 @@ namespace T3App.API.Controllers
             {
                 Email = User.Identity?.Name,
                 Role = User.FindFirst(ClaimTypes.Role)?.Value ?? string.Empty,
-                OriginalEMail = User.FindFirst("OriginalEmail")?.Value
+                OriginalEmail = User.FindFirst("OriginalEmail")?.Value
             });
         }
 
@@ -142,7 +142,7 @@ namespace T3App.API.Controllers
             {
                 Email = request.Email,
                 Role = impersonatedRole,
-                OriginalEMail = userName,
+                OriginalEmail = userName,
                 AccessToken = jwtResult.AccessToken,
                 RefreshToken = jwtResult.RefreshToken.TokenString
             });
@@ -172,7 +172,7 @@ namespace T3App.API.Controllers
             {
                 Email = originalUserName,
                 Role = role,
-                OriginalEMail = null,
+                OriginalEmail = null,
                 AccessToken = jwtResult.AccessToken,
                 RefreshToken = jwtResult.RefreshToken.TokenString
             });

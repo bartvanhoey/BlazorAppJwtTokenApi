@@ -9,14 +9,15 @@ using T3App.Shared;
 
 namespace T3App.Tests
 {
-    public  class AccountControllerTestsBase : IDisposable
+    public  class ApiTestsBase : IDisposable
     {
         protected HttpClient _httpClient { get; }
         protected IServiceProvider _serviceProvider { get; }
 
-        protected LoginModel _adminCredentials = new LoginModel { Email = "admin", Password = "SecurePassword" };
+        protected LoginModel _validAdminCredentials = new LoginModel { Email = "admin", Password = "SecurePassword" };
+        protected LoginModel _invalidAdminCredentials = new LoginModel { Email = "admin", Password = "SecurePassword!" };
 
-        public AccountControllerTestsBase()
+        public ApiTestsBase()
         {
             var builder = Program.CreateHostBuilder(null)
                 .ConfigureWebHost(webHost =>

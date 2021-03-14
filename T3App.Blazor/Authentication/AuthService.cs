@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using T3App.Shared.Extensions;
+using System.Net;
 
 namespace T3App.Blazor.Authentication
 {
@@ -64,7 +65,9 @@ namespace T3App.Blazor.Authentication
         {
             await _localStorage.RemoveItemAsync("authToken");
             ((ApiAuthenticationStateProvider)_authenticationStateProvider).MarkUserAsLoggedOut();
+            var response = await _httpClient.PostAsync("api/account/logout", null);
             _httpClient.DefaultRequestHeaders.Authorization = null;
+            if (response.StatusCode != HttpStatusCode.OK) throw new Exception("something went wrong while logging out");
         }
     }
 }
