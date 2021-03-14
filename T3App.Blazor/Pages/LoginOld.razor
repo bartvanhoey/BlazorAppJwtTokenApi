@@ -1,0 +1,18 @@
+﻿@*@page "/"
+@inherits LoginBase
+
+<h2><b>Login</b></h2>
+
+<hr>
+
+<div class="col-6">
+    <input type="text" @bind="LoginViewModel.EmailAddress" class="form-control" placeholder="email address">
+</div>
+<br>
+<div class="col-6">
+    <input type="password" @bind="LoginViewModel.Password" class="form-control" placeholder="password">
+</div>
+<br>
+<div class="col-6">
+    <button class="btn btn-primary" @onclick="LoginUser">Login</button>
+</div>*@
