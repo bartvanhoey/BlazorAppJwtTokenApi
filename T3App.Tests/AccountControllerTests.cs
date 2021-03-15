@@ -48,8 +48,8 @@ namespace T3App.Tests
 
             var jwtAuthManager = _serviceProvider.GetRequiredService<IJwtAuthManager>();
             var (principal, jwtSecurityToken) = jwtAuthManager.DecodeJwtToken(result.AccessToken);
-            principal.Identity.Name.Should().Be(_validAdminCredentials.Email);
-            principal.FindFirst(ClaimTypes.Role).Value.Should().Be(UserRoles.Admin);
+            principal.Identity?.Name.Should().Be(_validAdminCredentials.Email);
+            principal.FindFirst(ClaimTypes.Role)?.Value.Should().Be(UserRoles.Admin);
             jwtSecurityToken.Should().NotBeNull();
         }
 
@@ -65,7 +65,7 @@ namespace T3App.Tests
 
             jwtAuthManager.UsersRefreshTokensReadOnlyDictionary.Keys.Should().Contain(result.RefreshToken);
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue(JwtBearerDefaults.AuthenticationScheme, result.AccessToken);
-            var logoutResponse = await _httpClient.PostAsync("api/account/logout", null);
+            var logoutResponse = await _httpClient.PostAsync("api/account/logout", null!);
             logoutResponse.StatusCode.Should().Be(HttpStatusCode.OK);
             jwtAuthManager.UsersRefreshTokensReadOnlyDictionary.Keys.Should().NotContain(result.RefreshToken);
         }
@@ -94,8 +94,8 @@ namespace T3App.Tests
             response.StatusCode.Should().Be(HttpStatusCode.OK);            
 
             var refreshToken2 = jwtAuthManager.UsersRefreshTokensReadOnlyDictionary.GetValueOrDefault(result.RefreshToken);
-            result.RefreshToken.Should().Be(refreshToken2.TokenString);
-            refreshToken2.TokenString.Should().NotBe(jwtResult.RefreshToken.TokenString);
+            result.RefreshToken.Should().Be(refreshToken2?.TokenString);
+            refreshToken2?.TokenString.Should().NotBe(jwtResult.RefreshToken.TokenString);
             result.AccessToken.Should().NotBe(jwtResult.AccessToken);
         }
 
@@ -154,9 +154,9 @@ namespace T3App.Tests
             result.RefreshToken.Should().NotBeNullOrWhiteSpace();
 
             var (principal, jwtSecurityToken) = jwtAuthManager.DecodeJwtToken(result.AccessToken);
-            principal.Identity.Name.Should().Be(request.Email);
-            principal.FindFirst(ClaimTypes.Role).Value.Should().Be(UserRoles.BasicUser);
-            principal.FindFirst("OriginalEmail").Value.Should().Be(userName);
+            principal.Identity?.Name.Should().Be(request.Email);
+            principal.FindFirst(ClaimTypes.Role)?.Value.Should().Be(UserRoles.BasicUser);
+            principal.FindFirst("OriginalEmail")?.Value.Should().Be(userName);
             jwtSecurityToken.Should().NotBeNull();
         }
         
