@@ -348,3 +348,9 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+/T3App.API/Controllers/SubmissionController.cs
+/T3App.API/submissions.json
+/T3App.Shared/ImpEx/Address.cs
+/T3App.Shared/ImpEx/Attachment.cs
+/T3App.Shared/ImpEx/Data.cs
+/T3App.Shared/ImpEx/Submission.cs
