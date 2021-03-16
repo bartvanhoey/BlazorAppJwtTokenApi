@@ -10,8 +10,6 @@ namespace T3App.UiTests
     {
         private readonly IWebDriver driver;
         private readonly string appURL;
-
-
         public UnitTest1()
         {
             var options = new ChromeOptions();
@@ -51,7 +49,7 @@ namespace T3App.UiTests
             driver.Navigate().GoToUrl(appURL + "/login");
 
             //var loginText = driver.FindElement(By.CssSelector("h1")).Text;
-            
+
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(15));
 
             var webElement = wait.Until(c => c.FindElement(By.CssSelector("h1")));
